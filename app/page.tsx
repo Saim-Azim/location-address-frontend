@@ -1,10 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import LocationInput from '@/components/LocationInput';
 import AddressDisplay from '@/components/AddressDisplay';
-import MapView from '@/components/MapView';
 import { GeocodingResult } from '@/types';
+
+// Import MapView with SSR disabled to prevent window errors
+const MapView = dynamic(() => import('@/components/MapView'), { ssr: false });
 
 export default function Home() {
   const [result, setResult] = useState<GeocodingResult | null>(null);
